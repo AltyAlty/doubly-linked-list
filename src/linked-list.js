@@ -39,6 +39,12 @@ class LinkedList {
         this._nodes.splice(index, 0, newNode);
         this.length++;
 
+        if (index === 0) {
+            this._head = newNode;            
+        } else if (index === this._nodes.length - 1) {
+            this._tail = newNode;
+        };
+
         return this;
     };
 
@@ -60,6 +66,20 @@ class LinkedList {
 
         if (this.length > 0) {
             this.length--;
+        };        
+
+        if (index === 0) {
+            
+            if (this._nodes[0]) {
+                this._head = this._nodes[0];
+            } else {
+                const newNode = new Node(null, null, null);
+                this._head = newNode;
+                this._tail = newNode;
+            }
+
+        } else if (index === this._nodes.length) {
+            this._tail = this._nodes[this._nodes.length - 1];
         };
 
         return this;
