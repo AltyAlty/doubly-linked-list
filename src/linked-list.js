@@ -1,27 +1,90 @@
 const Node = require('./node');
 
 class LinkedList {
-    constructor() {}
+    constructor() {
+        this.length = 0;
+        this._head = null;
+        this._tail = null;
+        this._nodes = [];
+    };
 
-    append(data) {}
+    append(data) {
+        const newNode = new Node(data, null, null);
+        this._nodes.push(newNode);
 
-    head() {}
+        if (this.length === 0) {
+            this._head = newNode;
+        };
 
-    tail() {}
+        this._tail = newNode;
+        this.length++;
 
-    at(index) {}
+        return this;
+    };
 
-    insertAt(index, data) {}
+    head() {
+        return this._head.data
+    };
 
-    isEmpty() {}
+    tail() {
+        return this._tail.data
+    };
 
-    clear() {}
+    at(index) {
+        return this._nodes[index].data;
+    };
 
-    deleteAt(index) {}
+    insertAt(index, data) {
+        const newNode = new Node(data, null, null);
+        this._nodes.splice(index, 0, newNode);
+        this.length++;
 
-    reverse() {}
+        return this;
+    };
 
-    indexOf(data) {}
-}
+    isEmpty() {
+        return this.length === 0;
+    };
+
+    clear() {
+        this.length = 0;
+        this._head.data = null;
+        this._tail.data = null;
+        this._nodes = [];
+
+        return this;
+    };
+
+    deleteAt(index) {
+        this._nodes.splice(index, 1);
+
+        if (this.length > 0) {
+            this.length--;
+        };
+
+        return this;
+    };
+
+    reverse() {
+        let _tempHead = this._head;
+        this._head = this._tail;
+        this._tail = _tempHead;
+        this._nodes.reverse();
+
+        return this;
+    };
+
+    indexOf(data) {
+        // for (let i = 0; i < this._nodes.length; i++) {
+        //     if (this._nodes[i].data === data) {
+        //         return i;
+        //     };
+        // };
+
+        // return -1;
+
+        return this._nodes.map(function (e) { return e.data; }).indexOf(data);
+    };
+};
 
 module.exports = LinkedList;
